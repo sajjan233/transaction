@@ -10,9 +10,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json())
 
 
-mongoose.connect(connaction.DB,{
-    
-})
+mongoose.connect(connaction.DB)
     .then(() => {
         console.log("database connaction",true);
     })
@@ -21,10 +19,9 @@ mongoose.connect(connaction.DB,{
     })
 
 
-const acount = require('./router/acount')
-const transafer = require("./router/transaction")
-app.use('',acount)
-app.use('',transafer)
+const allRoutes = require('./router/index');
+app.use('/',allRoutes)
+
 
 
 
