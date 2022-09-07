@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const transferSchema =  new mongoose.Schema(
     {
+        transactioType:{type:String},
         fromusername:{type:String},
         tousername:{type:String},
         balanceAfter:{type:Number},
