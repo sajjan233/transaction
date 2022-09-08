@@ -4,8 +4,8 @@ const Transaction = require('../modul/transaction')
 
        
 const balanceInfo = async (fromUsername, toUsername, amount, message) => {
-    const fromAcount = await Acount.findOneAndUpdate({ username: fromUsername }, { $inc: { balance: -amount } });
-    if (fromAcount) {
+    const fromAcount = await Acount.findOneAndUpdate({$and:[{ username: fromUsername},{$and:[{balance:{$gt:0}},{balance:{$gte:amount}}]}]}, { $inc: { balance: -amount } });
+    if (fromAcount && (fromAcount.balance > amount)) {
         const toAcount = await Acount.findOneAndUpdate({ username: toUsername }, { $inc: { balance: amount } });
         let result = {};
         if (toAcount) {
